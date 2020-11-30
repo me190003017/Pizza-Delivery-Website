@@ -1,0 +1,17 @@
+1) create directory structure
+2) create a NPM project and install all dependencies
+---------Dependencies
+                -express
+                -ejs express-ejs-layouts
+         Dev dependencies
+                -nodemon
+3) create express server - create a server.js file
+4) git setup and first commit
+5) install laravel mx
+   - setup js and scss
+6)install tailwind css
+7) create home page using html and css
+     - include tailwind css
+8) create cart page
+      -order summary section
+      -empty cart section
