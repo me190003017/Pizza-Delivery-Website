@@ -7,9 +7,12 @@
                 -nodemon
 3) create express server - create a server.js file
 4) git setup and first commit
-5) install laravel mx
+5) install laravel mix
    - setup js and scss
 6)install tailwind css
+important commands
+yarn dev
+yarn watch
 7) create home page using html and css
      - include tailwind css
 8) create cart page
