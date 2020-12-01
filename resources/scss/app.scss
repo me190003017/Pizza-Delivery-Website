@@ -6,6 +6,7 @@ body{
     color: $dark;
    
 }
+
 nav li:last-child a{
     background: $primary;
     &:hover{
@@ -34,5 +35,46 @@ section.hero{
         background: $primary;
         border-color: $pure;
         color: $pure;
+    }
+}
+
+.btn-primary{
+    transition: $smooth;
+    background: $primary;
+    &:hover{
+        background: $primary-hover;
+    }
+}
+
+section.cart{
+    background: $secondary;
+    .amount{
+        color: $primary;
+    }
+}
+section.login{
+    background: $secondary;
+    // .max-w-xs {
+    //     max-width: 22rem;
+    // }
+  
+    min-height: calc(100vh-86px);
+    a{
+        color: $primary;
+        &:hover{
+            color: $primary-hover;
+        }
+    }
+
+}
+section.register{  
+    background: $secondary;
+    min-height: calc(100vh-86px);
+
+    a{
+        color: $primary;
+        &:hover{
+            color: $primary-hover;
+        }
     }
 }
