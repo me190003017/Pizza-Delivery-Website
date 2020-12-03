@@ -18,3 +18,24 @@ yarn watch
 8) create cart page
       -order summary section
       -empty cart section
+9) move routes to routes files
+10) create dedicated controllers
+
+Then create a data base using mongo db compass
+fetch all pizzas from db and show on home page
+---1) fetch all pizzas from db and show on home page
+---2) create menu model and put dummy data
+            - connect to mongo db
+
+            
+11) Add to cart functionality
+---1) fetch all pizzas from db and show on home page
+---2) create menu model and put dummy data
+            - connect to mongo db
+            - use connect-mongo for session store
+                  -dependencies
+                        -mongoose,express-session,connect-mongo(to store session in Database),dotenv
+            - axios to send ajax request
+            -install notification library npm i noty  http://ned.im/noty/#/
+12) Create Order controller and link it in server.js
+13)
