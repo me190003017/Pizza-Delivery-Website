@@ -37,5 +37,14 @@ fetch all pizzas from db and show on home page
                         -mongoose,express-session,connect-mongo(to store session in Database),dotenv
             - axios to send ajax request
             -install notification library npm i noty  http://ned.im/noty/#/
-12) Create Order controller and link it in server.js
-13)
+
+12)create login page with routes
+13)create register page with routes
+14)Build register crud
+-----dependencies express-flash express-session dotenv
+-----status code article http://www.restapitutorial.com/httpstatuscodes.html
+
+15) Build login using passport
+---------install dependencies passport passport-local express-session
+16)create order controllers and link it in server.js
+17) create order view with table for customer and admin 
