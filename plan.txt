@@ -47,4 +47,8 @@ fetch all pizzas from db and show on home page
 15) Build login using passport
 ---------install dependencies passport passport-local express-session
 16)create order controllers and link it in server.js
-17) create order view with table for customer and admin 
+17) create order view  table for customer and admin 
+18)placed order functionality
+19)show all orders on customer order page
+20)Order tracker
+--dependencies moment

@@ -1,57 +1,10 @@
-const { update } = require("../../app/models/menu");
-import axios from 'axios'
-import Noty from 'noty'
+// const { generateCodeFrame } = require("vue-template-compiler")
 const Order = require("../../app/models/order")
 import moment from 'moment'
-// this is client side code
-let addToCart = document.querySelectorAll('.add-to-cart');
-let cartCounter = document.querySelector('#cartCounter');
-function updateCart(pizza) {
-    // we can use ajax to fatch API
-    // But we are using axios library to send ajax request
-    axios.post('/update-cart', pizza).then(res => {
-
-        console.log(res)
-        cartCounter.innerText = res.data.totalQty;
-        new Noty({
-            type: "success",
-            timeout: 1000,
-            text: 'Item added to cart',
-            progressBar: false,
-            // layout:"topLeft"
-        }).show();
-    }).catch(err => {
-        new Noty({
-            type: "error",
-            timeout: 1000,
-            text: 'Something went wrong',
-            progressBar: false,
-            // layout:"topLeft"
-        }).show();
-    })
-}
-addToCart.forEach((btn) => {
-    btn.addEventListener('click', (e) => {
-        console.log(e);
-        let pizza = JSON.parse(btn.dataset.pizza);
-        updateCart(pizza)
-        console.log(pizza);
-    })
-})
-
-const alertMSg = document.querySelector('#success-alert')
-if (alertMSg) {
-    setTimeout(() => {
-        alertMSg.remove()
-    }, 2000)
-}
-
-// const { generateCodeFrame } = require("vue-template-compiler")
-
-// import axios from 'axios'
+import axios from 'axios'
 
 function initadmin(){
-    const ordertablebody=document.querySelector('#orderTableBody')
+    const ordertablebody=document.querySelector('orderTableBody')
     let orders=[]
     let markup
 
@@ -62,7 +15,7 @@ function initadmin(){
     }).then(res =>{
         orders=res.data
         markup=generateMarkup(orders)
-        ordertablebody.innerHTML=markup
+        ordertablebody.innerHTML=``
     }).catch(err =>{
         console.log(err);
     })
@@ -85,7 +38,7 @@ function initadmin(){
                     <div>${ renderItems(order.items) }</div>
                 </td>
                 <td class="border px-4 py-2">${ order.customerId.name }</td>
-                 <td class="border px-4 py-2">${ order.phone }</td>
+                <td class="border px-4 py-2">${ order.customerId.phone }</td>
                 <td class="border px-4 py-2">${ order.address }</td>
                 <td class="border px-4 py-2">
                     <div class="inline-block relative w-64">
@@ -131,4 +84,3 @@ function initadmin(){
 }
 
 
-initadmin()

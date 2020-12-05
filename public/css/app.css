@@ -401,3 +401,7 @@ section.register a:hover {
   padding-left: 8px !important;
 }
 
+a.link {
+  color: #FE5F1E;
+}
+
