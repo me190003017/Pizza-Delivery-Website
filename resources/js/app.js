@@ -50,25 +50,25 @@ if (alertMSg) {
 
 // import axios from 'axios'
 
-function initadmin(){
-    const ordertablebody=document.querySelector('#orderTableBody')
-    let orders=[]
+function initadmin(socket) {
+    const ordertablebody = document.querySelector('#orderTableBody')
+    let orders = []
     let markup
 
-    axios.get('/admin/orders',{
-        headers:{
-            "X-Requested-With":"XMLHttpRequest"
+    axios.get('/admin/orders', {
+        headers: {
+            "X-Requested-With": "XMLHttpRequest"
         }
-    }).then(res =>{
-        orders=res.data
-        markup=generateMarkup(orders)
-        ordertablebody.innerHTML=markup
-    }).catch(err =>{
+    }).then(res => {
+        orders = res.data
+        markup = generateMarkup(orders)
+        ordertablebody.innerHTML = markup
+    }).catch(err => {
         console.log(err);
     })
 
-    function renderItems(items){
-        let parsedItem=Object.values(items)
+    function renderItems(items) {
+        let parsedItem = Object.values(items)
         return parsedItem.map((menuItem) => {
             return `
             <p>${menuItem.item.name} - ${menuItem.qty}</p>
@@ -76,34 +76,34 @@ function initadmin(){
         }).join('')
     }
 
-    function generateMarkup(orders){
+    function generateMarkup(orders) {
         return orders.map(order => {
             return `
                 <tr>
                 <td class="border px-4 py-2 text-green-900">
-                    <p>${ order._id }</p>
-                    <div>${ renderItems(order.items) }</div>
+                    <p>${order._id}</p>
+                    <div>${renderItems(order.items)}</div>
                 </td>
-                <td class="border px-4 py-2">${ order.customerId.name }</td>
-                 <td class="border px-4 py-2">${ order.phone }</td>
-                <td class="border px-4 py-2">${ order.address }</td>
+                <td class="border px-4 py-2">${order.customerId.name}</td>
+                 <td class="border px-4 py-2">${order.phone}</td>
+                <td class="border px-4 py-2">${order.address}</td>
                 <td class="border px-4 py-2">
                     <div class="inline-block relative w-64">
                         <form action="/admin/order/status" method="POST">
-                            <input type="hidden" name="orderId" value="${ order._id }">
+                            <input type="hidden" name="orderId" value="${order._id}">
                             <select name="status" onchange="this.form.submit()"
                                 class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
                                 <option value="order_placed"
-                                    ${ order.status === 'order_placed' ? 'selected' : '' }>
+                                    ${order.status === 'order_placed' ? 'selected' : ''}>
                                     Placed</option>
-                                <option value="confirmed" ${ order.status === 'confirmed' ? 'selected' : '' }>
+                                <option value="confirmed" ${order.status === 'confirmed' ? 'selected' : ''}>
                                     Confirmed</option>
-                                <option value="prepared" ${ order.status === 'prepared' ? 'selected' : '' }>
+                                <option value="prepared" ${order.status === 'prepared' ? 'selected' : ''}>
                                     Prepared</option>
-                                <option value="delivered" ${ order.status === 'delivered' ? 'selected' : '' }>
+                                <option value="delivered" ${order.status === 'delivered' ? 'selected' : ''}>
                                     Delivered
                                 </option>
-                                <option value="completed" ${ order.status === 'completed' ? 'selected' : '' }>
+                                <option value="completed" ${order.status === 'completed' ? 'selected' : ''}>
                                     Completed
                                 </option>
                             </select>
@@ -119,16 +119,95 @@ function initadmin(){
                     </div>
                 </td>
                 <td class="border px-4 py-2">
-                    ${ moment(order.createdAt).format('hh:mm A') }
+                    ${moment(order.createdAt).format('hh:mm A')}
                 </td>
                 <td class="border px-4 py-2">
-                    ${ order.paymentStatus ? 'paid' : 'Not paid' }
+                    ${order.paymentStatus ? 'paid' : 'Not paid'}
                 </td>
             </tr>
         `
         }).join('')
     }
+    socket.on('orderPlaced',(order)=>{
+        new Noty({
+            type: "success",
+            timeout: 1000,
+            text: 'New Order Placed',
+            progressBar: false,
+            // layout:"topLeft"
+        }).show();
+        orders.unshift(order)
+        ordertablebody.innerHTML=''
+        ordertablebody.innerHTML=generateMarkup(orders)
+    })
 }
 
 
-initadmin()
+
+
+
+
+// Change orders status
+let statuses = document.querySelectorAll('.status_line')
+console.log(statuses)
+let hiddenInput = document.querySelector('#hiddenInput')
+let order = hiddenInput ? hiddenInput.value : null
+let time = document.createElement('small')
+
+
+
+order = JSON.parse(order)
+console.log(order)
+function updateStatus(order) {
+    statuses.forEach((status)=>{
+        status.classList.remove('step-completed')
+        status.classList.remove('current')
+    })
+    let stepCompleted = true;
+    statuses.forEach((status) => {
+        let dataProp = status.dataset.status
+        if (stepCompleted) {
+            status.classList.add('step-completed')
+        }
+        if (dataProp === order.status) {
+            time.innerText = moment(order.updatedAt).format('hh:mm A')
+            status.appendChild(time)
+            stepCompleted = false
+            if (status.nextElementSibling) {
+                status.nextElementSibling.classList.add('current')
+            }
+        }
+    })
+}
+updateStatus(order)
+
+let socket = io()
+initadmin(socket)
+// join
+if (order) {
+    socket.emit('join', `order_${order._id}`)
+}
+
+let adminAreaPath=window.location.pathname
+console.log(adminAreaPath)
+
+if(adminAreaPath.includes('admin')){
+    socket.emit('join','adminRoom')
+}
+
+
+socket.on('orderUpdated',(data)=>{
+    const updatedOrder={...order}
+    updatedOrder.updatedAt=moment().format()
+    updatedOrder.status=data.status
+    updateStatus(updatedOrder)
+    new Noty({
+        type: "success",
+        timeout: 1000,
+        text: 'Status Updated Successfully',
+        progressBar: false,
+        // layout:"topLeft"
+    }).show();
+    console.log(data)
+})
+

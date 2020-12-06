@@ -50,5 +50,9 @@ fetch all pizzas from db and show on home page
 17) create order view  table for customer and admin 
 18)placed order functionality
 19)show all orders on customer order page
+
+20) change order status
+
+21) create order single page with status
 20)Order tracker
 --dependencies moment

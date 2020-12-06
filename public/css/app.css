@@ -1,3 +1,5 @@
+@charset "UTF-8";
+
 .noty_layout_mixin,
 #noty_layout__centerRight,
 #noty_layout__centerLeft,
@@ -310,7 +312,7 @@ body {
 }
 
 nav li:last-child a {
-  background: #FE5F1E;
+  background: #fe5f1e;
 }
 
 nav li:last-child a:hover {
@@ -322,25 +324,25 @@ nav li a {
 }
 
 nav li a:hover {
-  color: #FE5F1E;
+  color: #fe5f1e;
 }
 
 section.hero {
-  background: #F8F8F8;
+  background: #f8f8f8;
 }
 
 .size {
-  background: #F8F8F8;
+  background: #f8f8f8;
 }
 
 .add-to-cart {
-  border: 2px solid #FE5F1E;
-  color: #FE5F1E;
+  border: 2px solid #fe5f1e;
+  color: #fe5f1e;
   transition: all 0.3s ease-in-out;
 }
 
 .add-to-cart:hover {
-  background: #FE5F1E;
+  background: #fe5f1e;
   border-color: #fff;
   color: #fff;
 }
@@ -351,7 +353,7 @@ section.hero {
 
 .btn-primary {
   transition: all 0.3s ease-in-out;
-  background: #FE5F1E;
+  background: #fe5f1e;
 }
 
 .btn-primary:hover {
@@ -363,20 +365,20 @@ section.hero {
 }
 
 section.cart {
-  background: #F8F8F8;
+  background: #f8f8f8;
 }
 
 section.cart .amount {
-  color: #FE5F1E;
+  color: #fe5f1e;
 }
 
 section.login {
-  background: #F8F8F8;
+  background: #f8f8f8;
   min-height: calc(100vh-86px);
 }
 
 section.login a {
-  color: #FE5F1E;
+  color: #fe5f1e;
 }
 
 section.login a:hover {
@@ -384,12 +386,12 @@ section.login a:hover {
 }
 
 section.register {
-  background: #F8F8F8;
+  background: #f8f8f8;
   min-height: calc(100vh-86px);
 }
 
 section.register a {
-  color: #FE5F1E;
+  color: #fe5f1e;
 }
 
 section.register a:hover {
@@ -402,6 +404,113 @@ section.register a:hover {
 }
 
 a.link {
-  color: #FE5F1E;
+  color: #fe5f1e;
+}
+
+section.status {
+  background: #f8f8f8;
+  min-height: calc(100vh-86px);
+}
+
+.status-box {
+  padding: 60px 0 0;
+}
+
+.status-box ul {
+  margin-left: 84px;
+}
+
+.status-box ul li span {
+  position: relative;
+  padding-left: 10px;
+}
+
+.status-box ul li span:after {
+  content: "";
+  position: absolute;
+  left: -19px;
+  top: 50%;
+  background: #232323;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  transform: translateY(-50%);
+  box-shadow: 0 0 1px 10px #f8f8f8;
+}
+
+.status-box ul li span:before {
+  font-family: "Line Awesome Free";
+  font-weight: 600;
+  font-size: 46px;
+  position: absolute;
+  left: -90px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: inherit;
+}
+
+.status-box ul li:nth-child(1) span:before {
+  content: "\F46C";
+}
+
+.status-box ul li:nth-child(2) span:before {
+  content: "\F560";
+}
+
+.status-box ul li:nth-child(3) span:before {
+  content: "\F818";
+}
+
+.status-box ul li:nth-child(4) span:before {
+  content: "\F0D1";
+}
+
+.status-box ul li:nth-child(5) span:before {
+  content: "\F582";
+}
+
+.status-box ul li {
+  position: relative;
+}
+
+.status-box ul li:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -15px;
+  width: 2px;
+  height: 100%;
+  background: #232323;
+  margin-top: 10px;
+}
+
+.status-box ul li:nth-child(5) span::after {
+  box-shadow: 0 20px 1px 20px #f8f8f8;
+}
+
+.status-box ul li.step-completed:before {
+  background: #ccc;
+}
+
+.status-box ul li.step-completed span:after {
+  background: #ccc;
+}
+
+.status-box ul li.step-completed span {
+  color: #ccc;
+}
+
+.status-box ul li.current span {
+  color: #fe5f1e;
+}
+
+.status-box ul li.current span :after {
+  background: #fe5f1e;
+}
+
+.status-box ul li small {
+  float: right;
+  font-size: 14px;
+  margin-top: 8px;
 }
 
