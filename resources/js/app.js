@@ -182,16 +182,17 @@ function updateStatus(order) {
 updateStatus(order)
 
 let socket = io()
-initadmin(socket)
+
 // join
 if (order) {
     socket.emit('join', `order_${order._id}`)
 }
 
 let adminAreaPath=window.location.pathname
-console.log(adminAreaPath)
+// console.log(adminAreaPath)
 
 if(adminAreaPath.includes('admin')){
+    initadmin(socket)
     socket.emit('join','adminRoom')
 }
 

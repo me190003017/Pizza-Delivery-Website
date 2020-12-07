@@ -1,6 +1,6 @@
 <section class="cart py-16">
     <%if(session.cart) { %>
-    <div class="order container mx-auto w-1/2">
+    <div class="order container mx-auto w-3/4  md:w-2/3 lg:w-1/2">
         <div class="flex items-center border-b border-gray-300 pb-4">
             <img src="/img/cart-black.png" alt="cart-black">
             <h1 class="font-bold ml-4 text-2xl">Order summary</h1>
@@ -20,7 +20,7 @@
         </div>
         <hr>
         <div class="text-right py-4">
-            <div>
+            <div >
                 <span class="text-lg font-bold">Total Amount:</span>
                 <span class="amount text-2xl font-bold ml-2">₹<%= session.cart.totalPrice%></span>
             </div>
